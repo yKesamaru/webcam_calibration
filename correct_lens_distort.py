@@ -17,5 +17,5 @@ dst = cv2.undistort(img, mtx, dist, None, mtx)
 
 # 補正後の画像の表示
 cv2.imshow('Undistorted Image', dst)
-cv2.waitKey(0)
+cv2.waitKey(0)  # なにかキーを押したら終了
 cv2.destroyAllWindows()

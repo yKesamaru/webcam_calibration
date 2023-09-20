@@ -6,8 +6,8 @@ import glob
 import cv2
 import numpy as np
 
-# チェスボードの内角の数
-CHECKERBOARD = (6,9)
+# チェスボードの内角の数（マス目の数は7x10）
+CHECKERBOARD = (6,9)  # (列,行)。印刷したチェスボードに合わせて変更してください。
 
 # 3Dのワールド座標系の点
 objpoints = []
@@ -30,6 +30,7 @@ for fname in images:
     ret, corners = cv2.findChessboardCorners(gray, CHECKERBOARD, None)
 
     if ret:
+        print(f"チェスボードの検出に失敗しました: {fname}")
         objpoints_list.append(objpoints)
         imgpoints_list.append(corners)
 
@@ -44,5 +45,4 @@ dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
 
 # パラメータの保存
 np.savez('calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
-
 print("キャリブレーションが完了しました。")
